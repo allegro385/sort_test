@@ -36,9 +36,9 @@ fn main() {
 
     //sort_select(&mut columns);
     //sort_bubbles(&mut columns);
-    sort_insert(&mut columns);
+    //sort_insert(&mut columns);
     //sort_insert_sub(&mut columns,1);
-
+    quick_sort(&mut columns);
     for column in columns{
         println!("data:{}/{}/{}",column.a,column.b,column.c);
     }
@@ -111,3 +111,35 @@ fn sort_insert(columns:&mut Vec<ColumnData>){
 //     }
 // }
 
+//クイックソート
+fn quick_sort(arr: &mut [ColumnData]) {
+    let len = arr.len();
+
+    if len < 2 {
+        return;
+    }
+
+    let pivot_index = partition(arr);
+    let (left, right) = arr.split_at_mut(pivot_index);
+
+    quick_sort(left);
+    quick_sort(&mut right[1..]);
+}
+
+fn partition(arr: &mut [ColumnData]) -> usize {
+    let len = arr.len();
+    let pivot_index = len / 2;
+
+    arr.swap(pivot_index, len - 1);
+
+    let mut i = 0;
+    for j in 0..len - 1 {
+        if arr[j].a <= arr[len - 1].a {
+            arr.swap(i, j);
+            i += 1;
+        }
+    }
+
+    arr.swap(i, len - 1);
+    i
+}
