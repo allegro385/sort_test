@@ -80,10 +80,10 @@ fn sort_bubbles(columns:&mut Vec<ColumnData>){
 fn sort_insert(columns:&mut Vec<ColumnData>){
     let len = columns.len();
     for i in 1..len{
-        let mut j = i;
-        while j >= 0 && columns[j].a >= columns[i].a{
-            columns.swap(i, j);
-            j -= 1;
+        for j in (0..i-1).rev() {
+            if columns[j].a >= columns[i].a {
+                columns.swap(i, j);
+            }
         }
     }
 }
