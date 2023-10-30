@@ -34,7 +34,8 @@ fn main() {
         columns.push(column);
     }
 
-    sort_select(&mut columns);
+    //sort_select(&mut columns);
+    sort_bubbles(&mut columns);
 
     for column in columns{
         println!("data:{}/{}/{}",column.a,column.b,column.c);
@@ -58,6 +59,18 @@ fn sort_select( columns:&mut Vec<ColumnData> ) {
         // 最小値を入れ替え
         if min_idx != i {
             columns.swap(i, min_idx);
+        }
+    }
+}
+
+//バブルソート
+fn sort_bubbles(columns:&mut Vec<ColumnData>){
+    let len = columns.len();
+    for i in 0..len - 1{
+        for j in i + 1..len{
+            if columns[j].a < columns[i].a{
+                columns.swap(i, j);
+            }
         }
     }
 }
