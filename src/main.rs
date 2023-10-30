@@ -35,7 +35,8 @@ fn main() {
     }
 
     //sort_select(&mut columns);
-    sort_bubbles(&mut columns);
+    //sort_bubbles(&mut columns);
+    sort_insert(&mut columns);
 
     for column in columns{
         println!("data:{}/{}/{}",column.a,column.b,column.c);
@@ -71,6 +72,18 @@ fn sort_bubbles(columns:&mut Vec<ColumnData>){
             if columns[j].a < columns[i].a{
                 columns.swap(i, j);
             }
+        }
+    }
+}
+
+//挿入ソート
+fn sort_insert(columns:&mut Vec<ColumnData>){
+    let len = columns.len();
+    for i in 1..len{
+        let mut j = i;
+        while j >= 0 && columns[j].a >= columns[i].a{
+            columns.swap(i, j);
+            j -= 1;
         }
     }
 }
